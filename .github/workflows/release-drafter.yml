@@ -1,0 +1,12 @@
+---
+    name: Release Drafter
+    
+    on:
+      push:
+        branches:
+          - master
+    
+    jobs:
+      update_release_draft:
+        uses: Flaconi/github-reusable-workflow/.github/workflows/release-drafter.yml@v1
+        secrets: inherit

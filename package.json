@@ -1,38 +1,44 @@
 {
-  "name": "serverless-lambda-edge-pre-existing-cloudfront",
-  "version": "1.1.6",
+  "name": "@flaconi/serverless-lambda-edge-pre-existing-cloudfront",
+  "version": "2.0.0-beta.1",
   "description": "The Serverless Framework plugin which creates Lambda@Edge against pre-existing CloudFront.",
-  "main": "index.js",
-  "author": "serverless-operations",
-  "repository": "serverless-operations/serverless-lambda-edge-pre-existing-cloudfront",
+  "main": "dist/index.js",
+  "author": "flaconi",
+  "repository": "https://github.com/flaconi/serverless-lambda-edge-pre-existing-cloudfront",
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
   "scripts": {
+    "compile": "tsc",
+    "build": "rm -rf dist && tsc",
     "lint": "eslint .",
-    "fmt": "eslint . --fix --cache",
-    "semantic-release": "semantic-release"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint"
-    ]
+    "fmt": "eslint --fix .",
+    "test": "exit 0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
-    "semantic-release": "^17.0.4"
+    "@types/node": "^24.10.1",
+    "@types/serverless": "^3.12.27",
+    "@typescript-eslint/parser": "^8.46.4",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "osls": "^3.59.2",
+    "prettier": "^3.6.2",
+    "semantic-release": "^25.0.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@aws-sdk/client-cloudformation": "^3.931.0",
+    "@aws-sdk/client-cloudfront": "^3.931.0",
+    "@aws-sdk/client-lambda": "^3.931.0"
+  },
+  "packageManager": "yarn@4.11.0"
 }
