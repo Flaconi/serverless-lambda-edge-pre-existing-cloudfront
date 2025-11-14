@@ -1,0 +1,36 @@
+---
+    name: Dependabot auto-merge
+    on: [pull_request, workflow_call]
+    permissions:
+      contents: write
+      pull-requests: write
+    jobs:
+      auto-merge:
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        runs-on: ubuntu-24.04
+        timeout-minutes: 5
+        steps:
+          - uses: actions/checkout@v5
+            with:
+              show-progress: false
+          - name: Dependabot metadata
+            id: dependabot-metadata
+            # if: github.actor == 'bot-shop-ci'
+            uses: dependabot/fetch-metadata@v2
+          - name: Approve a PR if not already approved
+            if: steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major' || steps.dependabot-metadata.outputs.dependency-type == 'direct:development'
+            run: |
+              gh pr checkout "$PR_URL"  # sets the upstream metadata for `gh pr status`
+              if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
+              then gh pr review --approve "$PR_URL"
+              else echo "PR already approved, skipping additional approvals to minimize emails/notification noise.";
+              fi
+            env:
+              PR_URL: ${{github.event.pull_request.html_url}}
+              GITHUB_TOKEN: ${{secrets.REPO_READ_TOKEN}}
+          - name: Enable auto-merge for Dependabot PRs
+            if: steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major' || steps.dependabot-metadata.outputs.dependency-type == 'direct:development'
+            run: gh pr merge --auto -s "$PR_URL"
+            env:
+              PR_URL: ${{github.event.pull_request.html_url}}
+              GITHUB_TOKEN: ${{secrets.REPO_READ_TOKEN}}

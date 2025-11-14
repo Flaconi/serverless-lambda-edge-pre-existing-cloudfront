@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2020 Serverless Operations, inc
+Copyright (c) 2025 Flaconi GmbH
 
 The following license applies to all parts of this software except as
 documented below:

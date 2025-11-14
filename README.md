@@ -6,7 +6,7 @@ A Serverless Framework plugin which associates Lambda@Edge against pre-existing 
 You can install this plugin from npm registry.
 
 ```shell
-$ npm install --save-dev serverless-lambda-edge-pre-existing-cloudfront
+$ npm install --save-dev @flaconi/serverless-lambda-edge-pre-existing-cloudfront
 ```
 
 ## How it works
@@ -28,7 +28,7 @@ functions:
           stage: dev # Specify the stage at which you want this CloudFront distribution to be updated
 
 plugins:
-  - serverless-lambda-edge-pre-existing-cloudfront
+  - '@flaconi/serverless-lambda-edge-pre-existing-cloudfront'
 ```
 
 Run deploy

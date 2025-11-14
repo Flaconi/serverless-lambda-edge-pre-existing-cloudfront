@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: serverless-lambda-edge-pre-existing-cloudfront
+  description: Serverless Framework plugin which creates Lambda@Edge against pre-existing CloudFront distributions.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    npm/package: '@flaconi/serverless-lambda-edge-pre-existing-cloudfront'
+spec:
+  type: library
+  owner: platform
+  lifecycle: experimental
