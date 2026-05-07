@@ -1,6 +1,6 @@
 {
   "name": "@flaconi/serverless-lambda-edge-pre-existing-cloudfront",
-  "version": "2.0.0-beta.19363850190.0",
+  "version": "2.0.0-beta.25490248296.0",
   "description": "The Serverless Framework plugin which creates Lambda@Edge against pre-existing CloudFront.",
   "main": "dist/index.js",
   "author": "flaconi",
