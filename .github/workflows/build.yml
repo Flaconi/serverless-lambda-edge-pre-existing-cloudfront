@@ -52,7 +52,7 @@
           - run: yarn lint
       test:
         timeout-minutes: 10
-        if: ${{ ! inputs.skip && needs.compile.result == 'skipped'  }}
+        if: ${{ ! inputs.skip && needs.compile.result == 'success'  }}
         needs: [compile]
         runs-on: 'ubuntu-24.04'
         permissions:
