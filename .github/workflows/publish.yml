@@ -32,9 +32,13 @@
           contents: write
           id-token: write
         steps:
+          # the token is required so the version bump below is pushed as bot-shop-ci
+          # rather than github-actions[bot]; pushes made with the default GITHUB_TOKEN
+          # do not trigger further workflow runs
           - uses: actions/checkout@v5
             with:
               show-progress: false
+              token: ${{ secrets.REPO_READ_TOKEN }}
           - name: Set output
             id: vars
             shell: bash
