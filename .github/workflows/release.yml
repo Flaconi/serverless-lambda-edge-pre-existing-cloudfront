@@ -39,6 +39,8 @@ jobs:
   build:
     if: ${{ !contains(github.ref, 'refs/tags/') }}
     needs: changed_files
+    permissions:
+      contents: read
     # TODO: back to Flaconi/github-reusable-workflow@v1 before merge
     uses: Engerim/github-reusable-workflow/.github/workflows/build-node.yml@npm-public-workflows
     with:
@@ -48,6 +50,10 @@ jobs:
   prerelease:
     needs: [changed_files, build]
     if: ${{ needs.changed_files.outputs.src_any_changed == 'true' && !contains(github.ref, 'refs/tags/') }}
+    # the nested publish job pushes the version commit and needs the OIDC token for npm
+    permissions:
+      contents: write
+      id-token: write
     # TODO: back to Flaconi/github-reusable-workflow@v1 before merge
     uses: Engerim/github-reusable-workflow/.github/workflows/publish-node.yml@npm-public-workflows
     with:
@@ -60,6 +66,9 @@ jobs:
 
   publish:
     if: ${{ contains(github.ref, 'refs/tags/') }}
+    permissions:
+      contents: write
+      id-token: write
     # TODO: back to Flaconi/github-reusable-workflow@v1 before merge
     uses: Engerim/github-reusable-workflow/.github/workflows/publish-node.yml@npm-public-workflows
     with:
